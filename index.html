@@ -1,23 +1,41 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Book Management System</title>
 
     <style>
+
+        /* =========================
+           RESET
+        ========================= */
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+
+        /* =========================
+           BODY
+        ========================= */
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
         }
+
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
 
         .container {
             width: 90%;
@@ -25,14 +43,21 @@
             margin: 40px auto;
         }
 
+
         h1 {
             text-align: center;
             margin-bottom: 30px;
         }
 
+
         h2 {
             margin-bottom: 20px;
         }
+
+
+        /* =========================
+           FORM / BOOK CONTAINER
+        ========================= */
 
         .form-container,
         .book-container {
@@ -42,22 +67,35 @@
             border-radius: 10px;
         }
 
+
+        /* =========================
+           FORM
+        ========================= */
+
         form {
             display: grid;
             gap: 10px;
         }
 
+
         label {
             font-weight: bold;
         }
 
+
         input,
         select {
+            width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 16px;
         }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
 
         button {
             padding: 10px;
@@ -70,9 +108,15 @@
             margin-top: 10px;
         }
 
+
         button:hover {
             opacity: 0.8;
         }
+
+
+        /* =========================
+           SEARCH RESULT
+        ========================= */
 
         #searchResult {
             margin-top: 20px;
@@ -82,10 +126,26 @@
             line-height: 1.8;
         }
 
+
+        /* =========================
+           TABLE CONTAINER
+        ========================= */
+
+        .book-container {
+            overflow-x: auto;
+        }
+
+
+        /* =========================
+           TABLE
+        ========================= */
+
         table {
             width: 100%;
+            min-width: 700px;
             border-collapse: collapse;
         }
+
 
         th,
         td {
@@ -94,75 +154,233 @@
             text-align: center;
         }
 
+
         th {
             background-color: #333;
             color: white;
         }
 
+
         tr:nth-child(even) {
             background-color: #f9f9f9;
         }
 
-        /* ================================= MOBILE RESPONSIVE ================================= */ 
-        @media (max-width: 480px) { 
-            .container { 
-                width: 95%; 
-                margin: 20px auto; }
-            h1 { 
-                font-size: 24px; 
-                margin-bottom: 20px; } 
-            h2 { 
-                font-size: 20px; } 
-            .form-container, .book-container { 
-                padding: 15px; 
-                margin-bottom: 20px; } 
-            input, select, button { 
-                font-size: 14px; 
-                padding: 9px; } 
-            #searchResult { 
-                font-size: 14px; 
-                padding: 10px; } 
-            th, td { 
-                padding: 8px; 
-                font-size: 13px; } 
+
+        /* =========================
+           ACTION BUTTON
+        ========================= */
+
+        td button {
+            width: auto;
+            padding: 8px 12px;
+            margin: 2px;
         }
+
+
+        /* =========================
+           TABLET
+           ========================= */
+
+        @media (max-width: 768px) {
+
+            .container {
+                width: 95%;
+                margin: 25px auto;
+            }
+
+
+            h1 {
+                font-size: 28px;
+                margin-bottom: 25px;
+            }
+
+
+            h2 {
+                font-size: 22px;
+            }
+
+
+            .form-container,
+            .book-container {
+                padding: 20px;
+            }
+
+
+            input,
+            select {
+                font-size: 15px;
+            }
+
+
+            button {
+                font-size: 15px;
+            }
+
+        }
+
+
+        /* =========================
+           MOBILE
+           ========================= */
+
+        @media (max-width: 480px) {
+
+            .container {
+                width: 95%;
+                margin: 20px auto;
+            }
+
+
+            h1 {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+
+
+            h2 {
+                font-size: 20px;
+            }
+
+
+            .form-container,
+            .book-container {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+
+
+            input,
+            select {
+                width: 100%;
+                font-size: 14px;
+                padding: 9px;
+            }
+
+
+            /* Form buttons take full width */
+
+            form button {
+                width: 100%;
+                padding: 9px;
+                font-size: 14px;
+            }
+
+
+            /* Search button */
+
+            #searchResult + button {
+                width: 100%;
+            }
+
+
+            #searchResult {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+
+            /* Table can scroll horizontally */
+
+            .book-container {
+                overflow-x: auto;
+            }
+
+
+            table {
+                min-width: 700px;
+            }
+
+
+            th,
+            td {
+                padding: 8px;
+                font-size: 13px;
+            }
+
+
+            /* Action buttons stay normal size */
+
+            td button {
+                width: auto;
+                padding: 7px 10px;
+                font-size: 13px;
+                margin: 2px;
+            }
+
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
+
     <div class="container">
+
 
         <h1>Book Management System</h1>
 
-        <!-- ADD / UPDATE FORM -->
+
+        <!-- =========================
+             ADD BOOK
+        ========================= -->
 
         <div class="form-container">
 
             <h2>Add Book</h2>
 
+
             <form id="bookForm">
 
-                <label for="title">Book Title</label>
 
-                <input type="text" id="title" placeholder="Enter book title">
-
-
-                <label for="author">Author</label>
-
-                <input type="text" id="author" placeholder="Enter author name">
+                <label for="title">
+                    Book Title
+                </label>
 
 
-                <label for="price">Price</label>
+                <input
+                    type="text"
+                    id="title"
+                    placeholder="Enter book title"
+                >
 
-                <input type="number" id="price" placeholder="Enter price">
+
+                <label for="author">
+                    Author
+                </label>
 
 
-                <label for="category">Category</label>
+                <input
+                    type="text"
+                    id="author"
+                    placeholder="Enter author name"
+                >
+
+
+                <label for="price">
+                    Price
+                </label>
+
+
+                <input
+                    type="number"
+                    id="price"
+                    placeholder="Enter price"
+                >
+
+
+                <label for="category">
+                    Category
+                </label>
+
 
                 <select id="category">
 
-                    <option value="">Select Category</option>
+                    <option value="">
+                        Select Category
+                    </option>
 
                     <option value="Novel">
                         Novel
@@ -191,46 +409,75 @@
                 </select>
 
 
-                <button type="submit" id="submitButton">
+                <button
+                    type="submit"
+                    id="submitButton"
+                >
                     Add Book
                 </button>
+
 
             </form>
 
         </div>
 
+
+        <!-- =========================
+             SEARCH BOOK
+        ========================= -->
+
         <div class="form-container">
 
             <h2>Search Book</h2>
 
-            <input type="text" id="searchTitle" placeholder="Enter book title">
 
-            <button type="button" onclick="searchBook()">
+            <input
+                type="text"
+                id="searchTitle"
+                placeholder="Enter book title"
+            >
+
+
+            <button
+                type="button"
+                onclick="searchBook()"
+            >
                 Search
             </button>
+
 
             <div id="searchResult"></div>
 
         </div>
 
 
-        <!-- BOOK LIST -->
+        <!-- =========================
+             BOOK LIST
+        ========================= -->
 
         <div class="book-container">
 
             <h2>Book List</h2>
+
 
             <table>
 
                 <thead>
 
                     <tr>
+
                         <th>ID</th>
+
                         <th>Title</th>
+
                         <th>Author</th>
+
                         <th>Price</th>
+
                         <th>Category</th>
+
                         <th>Action</th>
+
                     </tr>
 
                 </thead>
@@ -242,15 +489,19 @@
 
                 </tbody>
 
+
             </table>
 
         </div>
+
 
     </div>
 
 
     <script src="book.js"></script>
 
+
 </body>
 
 </html>
+```
